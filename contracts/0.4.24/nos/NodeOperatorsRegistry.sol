@@ -699,4 +699,27 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
         KEYS_OP_INDEX_POSITION.setStorageUint256(keysOpIndex + 1);
         emit KeysOpIndexSet(keysOpIndex + 1);
     }
+
+    /**
+    * @notice Set the total signing keys, staking limit and used signing keys 
+    * of validators to stake for the node operator #`_id` to 0
+    * Set operator to non-active state
+    */
+    function disableNodeOperator(uint256 _id) external
+        operatorExists(_id)
+    {
+        _increaseKeysOpIndex();
+        emit NodeOperatorTotalKeysTrimmed(_id, operators[_id].totalSigningKeys);
+        emit NodeOperatorStakingLimitSet(_id, 0);
+        operators[_id].totalSigningKeys = 0;
+        operators[_id].stakingLimit = 0;
+        operators[_id].usedSigningKeys = 0;
+
+        if (operators[_id].active) {
+            uint256 activeOperatorsCount = getActiveNodeOperatorsCount();
+            ACTIVE_OPERATORS_COUNT_POSITION.setStorageUint256(activeOperatorsCount.sub(1));
+            operators[_id].active = false;
+            emit NodeOperatorActiveSet(_id, false);
+        }
+    }
 }
