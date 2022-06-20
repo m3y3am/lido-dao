@@ -1006,7 +1006,8 @@ contract Lido is ILido, StETH, AragonApp {
         // no-op
     }
 
-    function setValidatorsNumber(uint256 _validators) external{	
-        BEACON_VALIDATORS_POSITION.setStorageUint256(_validators);	
+    function setValidatorsNumber(uint256 _validators) external {	
+        BEACON_VALIDATORS_POSITION.setStorageUint256(_validators);
+        emit BeaconValidatorsUpdated(_validators);
     }
 }

@@ -261,4 +261,6 @@ interface ILido {
       * @return beaconBalance - total amount of Beacon-side Ether (sum of all the balances of Lido validators)
       */
     function getBeaconStat() external view returns (uint256 depositedValidators, uint256 beaconValidators, uint256 beaconBalance);
+
+    event BeaconValidatorsUpdated(uint256 beaconValidators);
 }
