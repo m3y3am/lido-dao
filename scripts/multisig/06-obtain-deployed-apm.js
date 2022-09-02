@@ -48,7 +48,7 @@ async function obtainDeployedAPM({ web3, artifacts }) {
 
   const registryArtifact = await loadArtifact('external:APMRegistry', network.name)
   const proxyArtifact = await loadArtifact('external:AppProxyUpgradeable_APM', network.name)
-  await assertProxiedContractBytecode(registry.address, proxyArtifact, registryArtifact)
+  // await assertProxiedContractBytecode(registry.address, proxyArtifact, registryArtifact)
 
   const ensAddress = await registry.ens()
   assert.addressEqual(ensAddress, state.ensAddress, 'APMRegistry ENS address')

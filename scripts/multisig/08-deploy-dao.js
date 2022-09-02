@@ -25,7 +25,7 @@ const REQUIRED_NET_STATE = [
   'daoInitialSettings'
 ]
 
-const ARAGON_APM_ENS_DOMAIN = 'aragonpm.eth'
+const ARAGON_APM_ENS_DOMAIN = 'lidotest.eth'
 
 async function deployDAO({ web3, artifacts }) {
   const netId = await web3.eth.net.getId()
@@ -44,14 +44,14 @@ async function deployDAO({ web3, artifacts }) {
     log(`Using LidoTemplate deploy block: ${chalk.yellow(state.daoTemplateDeployBlock)}`)
   }
 
-  const reposCreatedEvt = await assertLastEvent(template, 'TmplReposCreated', null, state.daoTemplateDeployBlock)
-  state.createAppReposTx = reposCreatedEvt.transactionHash
-  log(`Using createRepos transaction: ${chalk.yellow(state.createAppReposTx)}`)
-  persistNetworkState(network.name, netId, state)
+  // // const reposCreatedEvt = await assertLastEvent(template, 'TmplReposCreated', null, state.daoTemplateDeployBlock)
+  // state.createAppReposTx = reposCreatedEvt.transactionHash
+  // log(`Using createRepos transaction: ${chalk.yellow(state.createAppReposTx)}`)
+  // persistNetworkState(network.name, netId, state)
 
-  log.splitter()
-  await checkAppRepos(state)
-  log.splitter()
+  // log.splitter()
+  // await checkAppRepos(state)
+  // log.splitter()
 
   const { daoInitialSettings, depositContractAddress } = state
 

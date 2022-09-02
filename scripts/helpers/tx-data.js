@@ -5,6 +5,7 @@ const { log } = require('./log')
 
 async function saveCallTxData(txDesc, instance, methodName, filename, opts = {}) {
   const txData = await getCallTxData(instance, methodName, opts)
+  console.log(txData)
   log(
     `Saving data for ${chalk.yellow(txDesc)} transaction to ${chalk.yellow(filename)}` +
       (txData.gas ? ` (projected gas usage is ${chalk.yellow(txData.gas)})` : '')

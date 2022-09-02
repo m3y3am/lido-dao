@@ -19,6 +19,8 @@ async function assignENSName({ parentName = 'eth', labelName, owner, ens, assign
   log(`Label: ${chalk.yellow(labelName)} (${labelHash})`)
 
   let txResult
+  log(`ENS: ${ens.address}` )
+  log(`Node: ${node}`)
 
   if ((await ens.owner(node)) === owner) {
     txResult = await logTx(

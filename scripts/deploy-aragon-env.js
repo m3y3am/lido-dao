@@ -36,10 +36,8 @@ async function deployAragonEnv({ web3, artifacts, networkStateFile = NETWORK_STA
     log(`Setting owner to the first provided account: ${chalk.yellow(state.owner)}`)
   }
 
-  if (!state.aragonEnsLabelName) {
-    state.aragonEnsLabelName = ARAGON_ENS_LABEL
-    log(`Using Aragon ENS label: ${state.aragonEnsLabelName}`)
-  }
+  state.aragonEnsLabelName = "lidodaotestnet"
+  log(`Using Aragon ENS label: ${state.aragonEnsLabelName}`)
 
   logHeader(`ENS`)
   const ensResults = await useOrDeployENS({

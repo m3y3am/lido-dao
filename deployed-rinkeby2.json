@@ -1,0 +1,119 @@
+{
+  "networkId": 4,
+  "owner": "0x6666652521e95a1b0A46EE682Ac89e2E54cfCcEd",
+  "aragonEnsLabelName": "lidotest",
+  "lidoApmEnsName": "lidotestpm.eth",
+  "ensAddress": "0x9738888bf5ac2623EB29bEBf3202E9010698cfDa",
+  "multisigAddress": "0x6666652521e95a1b0A46EE682Ac89e2E54cfCcEd",
+  "ensFactoryAddress": "0xF497484d85D0b04f3be9a1e25EC2a536261cADfA",
+  "ensFactoryConstructorArgs": [],
+  "kernelBaseAddress": "0x854d5e6a69edA3E5f082eA34c6fFaF1702085a7B",
+  "kernelBaseConstructorArgs": [
+    true
+  ],
+  "aclBaseAddress": "0xd6567b44a05adF08982f49D8acBE8a78E82eC1F5",
+  "aclBaseConstructorArgs": [],
+  "evmScriptRegistryFactoryAddress": "0x3BAE6D1694e4C72d695D54eaa306942Cc1Be5417",
+  "evmScriptRegistryFactoryConstructorArgs": [],
+  "daoFactoryAddress": "0x5FA314016160aD1b407c919E4Af63678a76e1b5b",
+  "daoFactoryConstructorArgs": [
+    "0x854d5e6a69edA3E5f082eA34c6fFaF1702085a7B",
+    "0xd6567b44a05adF08982f49D8acBE8a78E82eC1F5",
+    "0x3BAE6D1694e4C72d695D54eaa306942Cc1Be5417"
+  ],
+  "apmRegistryBaseAddress": "0x5b57E24B0A9003dA062443f63DD0D28DF8f69f48",
+  "apmRepoBaseAddress": "0x9374Fc2753e01aFcc7632e928F75dB4FbA0d50EC",
+  "ensSubdomainRegistrarBaseAddress": "0x8132102a76112AB94854d26C7F3f98C3F21F915b",
+  "apmRegistryFactoryAddress": "0x179AE3E35581735A571C7cAeD95Ec8fDF6Ee9265",
+  "apmRegistryFactoryConstructorArgs": [
+    "0x5FA314016160aD1b407c919E4Af63678a76e1b5b",
+    "0x5b57E24B0A9003dA062443f63DD0D28DF8f69f48",
+    "0x9374Fc2753e01aFcc7632e928F75dB4FbA0d50EC",
+    "0x8132102a76112AB94854d26C7F3f98C3F21F915b",
+    "0x9738888bf5ac2623EB29bEBf3202E9010698cfDa",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "lidoApmEnsRegDurationSec": 94608000,
+  "aragonApmRegistryAddress": "0x40539129ac5FceefDC33DD2cc69aD0a23E3C02A1",
+  "aragonEnsNodeName": "lidotest.eth",
+  "aragonEnsNode": "0xffc56d72a1905089890bfe5fb755fb7943a5f34c7e1d2597e6738046add97548",
+  "miniMeTokenFactoryAddress": "0x3332Fa5656713862a87219460C7949fF47f85D1f",
+  "miniMeTokenFactoryConstructorArgs": [],
+  "aragonIDAddress": "0xbb4356E2Ab2a2577A530A807F21bCA7348E34b62",
+  "aragonIDConstructorArgs": [
+    "0x9738888bf5ac2623EB29bEBf3202E9010698cfDa",
+    "0xA8D4f4F12b9503EEC1e0Bd400f155fea3adA7E6B",
+    "0x7e74a86b6e146964fb965db04dc2590516da77f720bb6759337bf5632415fd86"
+  ],
+  "aragonIDEnsNodeName": "aragonid.eth",
+  "aragonIDEnsNode": "0x7e74a86b6e146964fb965db04dc2590516da77f720bb6759337bf5632415fd86",
+  "app:agent": {
+    "fullName": "agent.lidotest.eth",
+    "name": "agent",
+    "id": "0xdac9bb65f60cd72c46479e47111ed645aac9a844fc28bd1307fab4ebc4389778"
+  },
+  "app:voting": {
+    "fullName": "voting.lidotest.eth",
+    "name": "voting",
+    "id": "0x5cdfa28e284b1bd1a82dc99292f43634be164e8144c32da7b65eb90ff81d7439"
+  },
+  "depositContractAddress": "0xb9CD221115994F698F0F4531FcE86694C28ae9ac",
+  "depositContractConstructorArgs": [],
+  "daoInitialSettings": {
+    "voting": {
+      "minSupportRequired": "500000000000000000",
+      "minAcceptanceQuorum": "50000000000000000",
+      "voteDuration": 100,
+      "objectionPhaseDuration": 50
+    },
+    "beaconSpec": {
+      "depositContractAddress": "0xb9CD221115994F698F0F4531FcE86694C28ae9ac",
+      "epochsPerFrame": 225,
+      "slotsPerEpoch": 32,
+      "secondsPerSlot": 12,
+      "genesisTime": 1639659600
+    },
+    "fee": {
+      "totalPercent": 10,
+      "treasuryPercent": 50,
+      "insurancePercent": 0,
+      "nodeOperatorsPercent": 50
+    },
+    "token": {
+      "name": "TEST Lido DAO Token",
+      "symbol": "TLDO"
+    }
+  },
+  "daoTemplateConstructorArgs": [
+    "0x6666652521e95a1b0A46EE682Ac89e2E54cfCcEd",
+    "0x5FA314016160aD1b407c919E4Af63678a76e1b5b",
+    "0x9738888bf5ac2623EB29bEBf3202E9010698cfDa",
+    "0x3332Fa5656713862a87219460C7949fF47f85D1f",
+    "0xbb4356E2Ab2a2577A530A807F21bCA7348E34b62",
+    "0x179AE3E35581735A571C7cAeD95Ec8fDF6Ee9265"
+  ],
+  "daoTemplateDeployTx": "0xb717dde737a985b6e91e849df6b8c2bb4146e56f766c4bef43b9c4f7eb1c1019",
+  "lidoBaseDeployTx": "0xf3fac9424aa9ad7546f969174c9e52b35db294a1a81687aabf0b175b95971c52",
+  "oracleBaseDeployTx": "0x39faaec712905a092422d608495418265ab12de64e1625e86c6af732df922a61",
+  "nodeOperatorsRegistryBaseDeployTx": "0x48d11be7608cb6a09a0e05f8d0705dbe68789920d1b4be7e18980503bed3f869",
+  "daoTemplateAddress": "0x5C0e2052eEa5343BE1Bd5066b8C027fcbE4D5526",
+  "daoTemplateDeployBlock": 11053098,
+  "app:lido": {
+    "baseAddress": "0x307f5ece9464167BbAbF2701387f4aaF19df8f91",
+    "contentURI": "0x697066733a516d536359787a6d6d724156316344426a4c3369376a7a615a75694a373655716461465a694d6773786f46477a43"
+  },
+  "app:oracle": {
+    "baseAddress": "0x6cc1a62EfcB3e99763F7e58a62a3D022c6CA15B6",
+    "contentURI": "0x697066733a516d5162653934364d577a776a3831723257464b6354676b5173704e41657263624b3756325176684c583341716b"
+  },
+  "app:node-operators-registry": {
+    "baseAddress": "0xBEe03485D4436D47b4fC161a1A75d059BCB6EfdD",
+    "contentURI": "0x697066733a516d56656152365873316344654739357a69766668574c796a59506a4b7a6e4a746275684a7356587737416d7a6d"
+  },
+  "lidoApmDeployArguments": [
+    "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
+    "0x9d14870fe2fed0b52416a7b65bdb471a2cd32c01711ed3721e274dc4332ae86d"
+  ],
+  "lidoApmDeployTx": "0x547ca81c2235264625360c0ec39339416acf13cc23a9d9220e6687de4a5efaf1",
+  "lidoApmAddress": "0x20adB0b4923fde9e4B24b21e1Fc8d49099b16844"
+}

@@ -14,10 +14,10 @@ const { gitCloneRepo } = require('./helpers/git')
 const { uploadDirToIpfs } = require('@aragon/buidler-aragon/dist/src/utils/ipfs')
 const { toContentUri } = require('@aragon/buidler-aragon/dist/src/utils/apm/utils')
 
-const APPS = ['agent', 'finance', 'token-manager', 'vault', 'voting']
+const APPS = ['finance', 'token-manager', 'vault']
 
 const NETWORK_STATE_FILE = process.env.NETWORK_STATE_FILE || 'deployed.json'
-const ARAGON_APPS_REPO = process.env.ARAGON_APPS_REPO || 'https://github.com/aragon/aragon-apps.git'
+const ARAGON_APPS_REPO = process.env.ARAGON_APPS_REPO || 'https://github.com/lidofinance/aragon-apps.git'
 const ARAGON_APPS_REPO_REF = process.env.ARAGON_APPS_REPO_REF || 'master'
 const RELEASE_TYPE = 'major'
 
@@ -58,7 +58,7 @@ async function deployAragonStdApps({
 
   logHeader(`Checking out aragon-apps repo...`)
   const appsRepoPath = './aragon-apps'
-  await gitCloneRepo(appsRepoPath, aragonAppsRepo, aragonAppsRepoRef)
+  // await gitCloneRepo(appsRepoPath, aragonAppsRepo, aragonAppsRepoRef)
 
   // prevent Hardhat from passing the config to subprocesses
   const env = filterObject(process.env, (key) => key.substr(0, 8) !== 'HARDHAT_')

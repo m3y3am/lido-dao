@@ -62,7 +62,7 @@
       "network": "development"
     },
     "rinkeby": {
-      "appName": "lido.lidopm.eth",
+      "appName": "lido.lidodaotestnet.eth",
       "network": "rinkeby"
     },
     "mainnet-test": {

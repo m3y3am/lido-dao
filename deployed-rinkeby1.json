@@ -1,0 +1,44 @@
+{
+  "networkId": 4,
+  "owner": "0x6666652521e95a1b0A46EE682Ac89e2E54cfCcEd",
+  "aragonEnsLabelName": "dao.lido",
+  "ensAddress": "0x4a9f2C5664e32F8BeF3C41cf15FE5D589a051A15",
+  "ensFactoryAddress": "0xcfB3557D5a5e6a94b4eAE76aF51823376D805535",
+  "ensFactoryConstructorArgs": [],
+  "kernelBaseAddress": "0x01416870352a46e316243b17631A41726A0A86Ce",
+  "kernelBaseConstructorArgs": [
+    true
+  ],
+  "aclBaseAddress": "0x6eb205da3578200FE5bEaC2C51F422160347d90b",
+  "aclBaseConstructorArgs": [],
+  "evmScriptRegistryFactoryAddress": "0x1857040f34858A8e5fFeDB42367e5FB62c0CfEdf",
+  "evmScriptRegistryFactoryConstructorArgs": [],
+  "daoFactoryAddress": "0x5F569f7fD121687d86cDb9BA9cE69CC7b74C3951",
+  "daoFactoryConstructorArgs": [
+    "0x01416870352a46e316243b17631A41726A0A86Ce",
+    "0x6eb205da3578200FE5bEaC2C51F422160347d90b",
+    "0x1857040f34858A8e5fFeDB42367e5FB62c0CfEdf"
+  ],
+  "apmRegistryBaseAddress": "0x8c9BA454153cf4080bc1E4F835acb795E6Fc9520",
+  "apmRepoBaseAddress": "0x7D50b3A0753Df4BDcf7443f7d49d4EC24488e1C6",
+  "ensSubdomainRegistrarBaseAddress": "0xF995eA59D2cF9aCC868Fd4C8B7eF291392895749",
+  "apmRegistryFactoryAddress": "0x8367CFb97C67Da93870a382906F81DA57b208E51",
+  "apmRegistryFactoryConstructorArgs": [
+    "0x5F569f7fD121687d86cDb9BA9cE69CC7b74C3951",
+    "0x8c9BA454153cf4080bc1E4F835acb795E6Fc9520",
+    "0x7D50b3A0753Df4BDcf7443f7d49d4EC24488e1C6",
+    "0xF995eA59D2cF9aCC868Fd4C8B7eF291392895749",
+    "0x4a9f2C5664e32F8BeF3C41cf15FE5D589a051A15",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "aragonApmRegistryAddress": "0xdB5BC2Bf8C3FD1D65160014066Ea893cd24682ba",
+  "aragonEnsNodeName": "dao.lido.eth",
+  "aragonEnsNode": "0x94fcd778f499cdfa8f68b7aad1af4109512d4557b49a320d7c883ab61042d82e",
+  "miniMeTokenFactoryAddress": "0x953fd81A9aF059fd78e350112740ed31B4087114",
+  "miniMeTokenFactoryConstructorArgs": [],
+  "app:agent": {
+    "fullName": "agent.lidotestnet.eth",
+    "name": "agent",
+    "id": "0x8b215005ea3d794505d90faae2b3c2533ceb518a13b1de277d3290a6d2bc7c90"
+  }
+}

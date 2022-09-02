@@ -47,6 +47,8 @@ async function deployTemplate({ web3, artifacts }) {
 
   log(`TLD node: ${chalk.yellow(TLD)} (${tldNode})`)
   log(`Label: ${chalk.yellow(domainLabel)} (${labelHash})`)
+  log(`Domain Owner ${await ens.owner(node)}`)
+  log(`TLD owner: ${(await ens.owner(tldNode))}`)
 
   if ((await ens.owner(node)) !== state.multisigAddress && (await ens.owner(tldNode)) !== state.multisigAddress) {
     const tldResolverAddr = await ens.resolver(tldNode)

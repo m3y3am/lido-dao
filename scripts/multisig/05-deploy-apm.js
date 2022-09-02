@@ -35,6 +35,10 @@ async function deployAPM({ web3, artifacts }) {
   const ens = await artifacts.require('ENS').at(state.ensAddress)
   const lidoApmEnsNode = namehash(state.lidoApmEnsName)
   const lidoApmEnsNodeOwner = await getENSNodeOwner(ens, lidoApmEnsNode)
+  console.log(lidoApmEnsNodeOwner)
+  console.log(lidoApmEnsNode)
+  console.log(ens.address)
+  console.log(state.lidoApmEnsName)
   const checkDesc = `ENS node is owned by the DAO template`
 
   assert.equal(lidoApmEnsNodeOwner, state.daoTemplateAddress, checkDesc)
@@ -52,6 +56,7 @@ async function deployAPM({ web3, artifacts }) {
   logSplitter()
 
   const lidoApmDeployArguments = [parentHash, subHash]
+  console.log(lidoApmDeployArguments)
   await saveCallTxData(`APM deploy`, template, 'deployLidoAPM', `tx-03-deploy-apm.json`, {
     arguments: lidoApmDeployArguments,
     from: state.multisigAddress

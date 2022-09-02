@@ -39,6 +39,17 @@ async function createAppRepos({ web3, artifacts }) {
   const lidoAppState = state[`app:${APP_NAMES.LIDO}`]
   const oracleAppState = state[`app:${APP_NAMES.ORACLE}`]
   const nodeOperatorsAppState = state[`app:${APP_NAMES.NODE_OPERATORS_REGISTRY}`]
+  console.log(
+    [1, 0, 0],
+    // Lido app
+    lidoAppState.baseAddress,
+    lidoAppState.contentURI,
+    // NodeOperatorsRegistry app
+    nodeOperatorsAppState.baseAddress,
+    nodeOperatorsAppState.contentURI,
+    // LidoOracle app
+    oracleAppState.baseAddress,
+    oracleAppState.contentURI)
 
   await saveCallTxData(`createRepos`, template, 'createRepos', `tx-07-create-app-repos.json`, {
     arguments: [
