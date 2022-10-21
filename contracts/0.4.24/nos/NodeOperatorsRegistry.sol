@@ -82,6 +82,10 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
     /// @dev link to the index of operations with keys
     bytes32 internal constant KEYS_OP_INDEX_POSITION = keccak256("lido.NodeOperatorsRegistry.keysOpIndex");
 
+    bytes32 internal constant TOTAL_KEYS_POSITION = keccak256("lido.NodeOperatorsRegistry.totalKeys");
+    bytes32 internal constant TOTAL_USED_KEYS_POSITION = keccak256("lido.NodeOperatorsRegistry.totalUsedKeys");
+    bytes32 internal constant TOTAL_STOPPED_KEYS_POSITION = keccak256("lido.NodeOperatorsRegistry.totalStoppedKeys");
+
 
     modifier onlyLido() {
         require(msg.sender == LIDO_POSITION.getStorageAddress(), "APP_AUTH_FAILED");
@@ -149,11 +153,17 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
         _increaseKeysOpIndex();
 
         uint256 activeOperatorsCount = getActiveNodeOperatorsCount();
-        if (_active)
+        if (_active) {
             ACTIVE_OPERATORS_COUNT_POSITION.setStorageUint256(activeOperatorsCount.add(1));
-        else
+            TOTAL_KEYS_POSITION.setStorageUint256(getTotalKeys().add(operators[_id].totalSigningKeys));
+            TOTAL_USED_KEYS_POSITION.setStorageUint256(getTotalKeys().add(operators[_id].usedSigningKeys));
+            TOTAL_STOPPED_KEYS_POSITION.setStorageUint256(getTotalKeys().add(operators[_id].stoppedValidators));
+        } else {
             ACTIVE_OPERATORS_COUNT_POSITION.setStorageUint256(activeOperatorsCount.sub(1));
-
+            TOTAL_KEYS_POSITION.setStorageUint256(getTotalKeys().sub(operators[_id].totalSigningKeys));
+            TOTAL_USED_KEYS_POSITION.setStorageUint256(getTotalKeys().sub(operators[_id].usedSigningKeys));
+            TOTAL_STOPPED_KEYS_POSITION.setStorageUint256(getTotalKeys().sub(operators[_id].stoppedValidators));
+        }
         operators[_id].active = _active;
 
         emit NodeOperatorActiveSet(_id, _active);
@@ -207,6 +217,7 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
         require(0 != _stoppedIncrement, "EMPTY_VALUE");
         operators[_id].stoppedValidators = operators[_id].stoppedValidators.add(_stoppedIncrement);
         require(operators[_id].stoppedValidators <= operators[_id].usedSigningKeys, "STOPPED_MORE_THAN_LAUNCHED");
+        TOTAL_STOPPED_KEYS_POSITION.setStorageUint256(getTotalStoppedKeys().add(_stoppedIncrement));
 
         emit NodeOperatorTotalStoppedValidatorsReported(_id, operators[_id].stoppedValidators);
     }
@@ -217,14 +228,17 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
       */
     function trimUnusedKeys() external onlyLido {
         uint256 length = getNodeOperatorsCount();
+        uint256 trimmedKeys = 0;
         for (uint256 operatorId = 0; operatorId < length; ++operatorId) {
             uint64 totalSigningKeys = operators[operatorId].totalSigningKeys;
             uint64 usedSigningKeys = operators[operatorId].usedSigningKeys;
             if (totalSigningKeys != usedSigningKeys) { // write only if update is needed
                 operators[operatorId].totalSigningKeys = usedSigningKeys;  // discard unused keys
+                trimmedKeys += totalSigningKeys - usedSigningKeys;
                 emit NodeOperatorTotalKeysTrimmed(operatorId, totalSigningKeys - usedSigningKeys);
             }
         }
+        TOTAL_KEYS_POSITION.setStorageUint256(getTotalKeys().sub(trimmedKeys));
     }
 
     /**
@@ -408,6 +422,7 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
 
         _increaseKeysOpIndex(); // numAssignedKeys is guaranteed to be > 0 here
         assert(numLoadedKeys == numAssignedKeys);
+        TOTAL_USED_KEYS_POSITION.setStorageUint256(getTotalUsedKeys().add(numLoadedKeys));
         return (pubkeys, signatures);
     }
 
@@ -490,6 +505,23 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
         totalSigningKeys = operator.totalSigningKeys;
         usedSigningKeys = operator.usedSigningKeys;
     }
+
+
+    /*
+     * Pro module methods
+     */
+    function getTotalKeys() public view returns (uint256) {
+        return TOTAL_KEYS_POSITION.getStorageUint256();
+    }
+
+    function getTotalUsedKeys() public view returns (uint256) {
+        return TOTAL_USED_KEYS_POSITION.getStorageUint256();
+    }
+
+    function getTotalStoppedKeys() public view returns (uint256) {
+        return TOTAL_STOPPED_KEYS_POSITION.getStorageUint256();
+    }
+
 
     /**
       * @notice Returns total number of signing keys of the node operator #`_operator_id`
@@ -606,6 +638,7 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
         }
 
         operators[_operator_id].totalSigningKeys = operators[_operator_id].totalSigningKeys.add(to64(_quantity));
+        TOTAL_KEYS_POSITION.setStorageUint256(getTotalKeys().add(_quantity));
     }
 
     function _removeSigningKey(uint256 _operator_id, uint256 _index) internal
@@ -626,6 +659,7 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
 
         _deleteSigningKey(_operator_id, lastIndex);
         operators[_operator_id].totalSigningKeys = operators[_operator_id].totalSigningKeys.sub(1);
+        TOTAL_KEYS_POSITION.setStorageUint256(getTotalKeys().sub(1));
 
         if (_index < operators[_operator_id].stakingLimit) {
             // decreasing the staking limit so the key at _index can't be used anymore
