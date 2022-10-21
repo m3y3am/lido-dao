@@ -4,6 +4,7 @@
 
 /* See contracts/COMPILERS.md */
 pragma solidity 0.4.24;
+pragma experimental ABIEncoderV2;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
 import "@aragon/os/contracts/common/IsContract.sol";
@@ -490,6 +491,53 @@ contract NodeOperatorsRegistry is INodeOperatorsRegistry, IsContract, AragonApp 
         totalSigningKeys = operator.totalSigningKeys;
         usedSigningKeys = operator.usedSigningKeys;
     }
+
+
+    /*
+     * Pro module methods
+     */
+     struct KeysStat {
+        uint256 totalKeys;
+        uint256 totalUsedKeys;
+        uint256 totalStoppedKeys;
+     }
+     function _loadOperatorKeysStat() internal view returns (KeysStat memory stat) {
+        if (0 == getActiveNodeOperatorsCount())
+            return stat;
+        
+        uint256 totalOperators = getNodeOperatorsCount();
+        for (uint256 operatorId = 0; operatorId < totalOperators;++operatorId) {
+            NodeOperator memory operator = operators[operatorId];
+            if (!operator.active) {
+                continue;
+            }
+            stat.totalKeys += operator.totalSigningKeys;
+            stat.totalUsedKeys += operator.usedSigningKeys;
+            stat.totalStoppedKeys += operator.stoppedValidators;
+        }
+
+        return stat;
+    }
+
+    function getKeysStat() external view returns (KeysStat memory) {
+        return _loadOperatorKeysStat();
+    }
+
+    function getTotalKeys() external view returns (uint256) {
+        KeysStat memory stat = _loadOperatorKeysStat();
+        return stat.totalKeys;
+    }
+
+    function getTotalUsedKeys() external view returns (uint256) {
+        KeysStat memory stat = _loadOperatorKeysStat();
+        return stat.totalUsedKeys;
+    }
+
+    function getTotalStoppedKeys() external view returns (uint256) {
+        KeysStat memory stat = _loadOperatorKeysStat();
+        return stat.totalStoppedKeys;
+    }
+
 
     /**
       * @notice Returns total number of signing keys of the node operator #`_operator_id`
