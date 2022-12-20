@@ -6,10 +6,9 @@ pragma solidity 0.4.24;
 
 import "../oracle/LidoOracle.sol";
 
-
 /**
-  * @dev Only for testing purposes! LidoOracle version with some functions exposed.
-  */
+ * @dev Only for testing purposes! LidoOracle version with some functions exposed.
+ */
 contract LidoOracleMock is LidoOracle {
     uint256 private time;
 
@@ -30,6 +29,6 @@ contract LidoOracleMock is LidoOracle {
     }
 
     function setVersion(uint256 _version) external {
-        CONTRACT_VERSION_POSITION.setStorageUint256(_version); 
+        CONTRACT_VERSION_POSITION.setStorageUint256(_version);
     }
 }
