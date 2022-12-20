@@ -40,7 +40,7 @@ const getNetConfig = (networkName, ethAccountName) => {
   const localhost = {
     ...base,
     url: 'http://localhost:8545',
-    chainId: 31337,
+    chainId: 1337,
     gas: 8000000 // the same as in Görli
   }
   const byNetName = {
