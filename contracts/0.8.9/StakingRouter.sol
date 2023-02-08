@@ -415,6 +415,35 @@ contract StakingRouter is AccessControlEnumerable, BeaconChainDepositor, Version
         return exitedKeysCount;
     }
 
+    struct ValidatorsReport {
+        uint256 totalExited;
+        uint256 totalActive;
+        uint256 totalReady;
+    } 
+
+    /**
+     * @notice Returns key stats fo given moduleId and nodeOperatorsIds
+     */
+    function getNodeOperatorsKeyStats(uint256 _stakingModuleId, uint256[] calldata nodeOpIds) 
+        external 
+        view 
+        validStakingModuleId(_stakingModuleId)
+        returns (ValidatorsReport[] memory stat) 
+    {
+        address moduleAddr = _getStakingModuleById(_stakingModuleId).stakingModuleAddress;
+
+        stat = new ValidatorsReport[](nodeOpIds.length);
+
+        for (uint256 i; i < nodeOpIds.length; ) {
+            uint256 nodeOpId = nodeOpIds[i];
+            (uint256 totalExited, uint256 totalActive, uint256 totalReady) = IStakingModule(moduleAddr)
+                .getValidatorsKeysStats(nodeOpId);
+
+            stat[i] = ValidatorsReport(totalExited, totalActive, totalReady);
+            unchecked { ++i; }
+        }
+    }
+
     /**
      * @notice Returns all registered staking modules
      */

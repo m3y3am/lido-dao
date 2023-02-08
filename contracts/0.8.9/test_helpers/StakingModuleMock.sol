@@ -12,6 +12,14 @@ contract StakingModuleMock is IStakingModule {
     uint256 private _availableKeysCount;
     uint256 private _keysNonce;
 
+    struct ValidatorsReport {
+        uint256 totalExited;
+        uint256 totalActive;
+        uint256 totalReady;
+    } 
+
+    mapping(uint256 => ValidatorsReport) internal operators;
+
     function getActiveKeysCount() public view returns (uint256) {
         return _activeKeysCount;
     }
@@ -57,6 +65,10 @@ contract StakingModuleMock is IStakingModule {
 
     function getNodeOperatorIsActive(uint256 _nodeOperatorId) external view returns (bool) {}
 
+    function setValidatorsKeysStats(uint256 _nodeOperatorId, ValidatorsReport calldata report) external {
+        operators[_nodeOperatorId] = report;
+    }
+
     function getValidatorsKeysStats(uint256 _nodeOperatorId)
         external
         view
@@ -65,7 +77,10 @@ contract StakingModuleMock is IStakingModule {
             uint256 activeValidatorsKeysCount,
             uint256 readyToDepositValidatorsKeysCount
         )
-    {}
+    {
+        ValidatorsReport memory report = operators[_nodeOperatorId];
+        return (report.totalExited, report.totalActive, report.totalReady);
+    }
 
     function handleRewardsMinted(uint256 _totalShares) external {}
 

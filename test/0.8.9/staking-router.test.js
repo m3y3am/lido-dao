@@ -6,6 +6,7 @@ const { assert } = require('../helpers/assert')
 const { EvmSnapshot } = require('../helpers/blockchain')
 const { newDao, newApp } = require('../helpers/dao')
 const { artifacts } = require('hardhat')
+const { assertBn } = require('@aragon/contract-helpers-test/src/asserts')
 
 const DepositContractMock = artifacts.require('DepositContractMock')
 const StakingRouterMock = artifacts.require('StakingRouterMock.sol')
@@ -782,6 +783,35 @@ contract('StakingRouter', ([deployer, lido, admin, appManager, stranger]) => {
         status: StakingModuleStatus.Active,
         setBy: appManager
       })
+    })
+
+    it('get operators stats', async () => {
+      await app.addStakingModule(
+        stakingModulesParams[0].name,
+        stakingModule1.address,
+        stakingModulesParams[0].targetShare,
+        stakingModulesParams[0].stakingModuleFee,
+        stakingModulesParams[0].treasuryFee,
+        {
+          from: appManager
+        }
+      )
+
+      await stakingModule1.setValidatorsKeysStats(1, [11,22,33])
+      await stakingModule1.setValidatorsKeysStats(2, [44,55,66])
+      await stakingModule1.setValidatorsKeysStats(3, [77,88,99])
+
+      let resOp1 = await app.getNodeOperatorsKeyStats(1, [1,2])
+
+      assert.equals(resOp1.length, 2)
+
+      assertBn(resOp1[0].totalExited, 11)
+      assertBn(resOp1[0].totalActive, 22)
+      assertBn(resOp1[0].totalReady, 33)
+
+      assertBn(resOp1[1].totalExited, 44)
+      assertBn(resOp1[1].totalActive, 55)
+      assertBn(resOp1[1].totalReady, 66)
     })
   })
 })
