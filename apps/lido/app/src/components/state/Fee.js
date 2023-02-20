@@ -31,7 +31,7 @@ export const Fee = () => {
   }
 
   return (
-    <ListItem label="Fee">
+    <ListItem label="Protocol fee">
       <Controls>
         <BasisPoints basisPoints={fee} />
         <IconButton label="edit" icon={<IconEdit />} onClick={openSidePanel} />

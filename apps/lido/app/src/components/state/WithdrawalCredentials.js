@@ -49,7 +49,7 @@ export const WithdrawalCredentials = () => {
   }
 
   return (
-    <ListItem label="Withdrawal Credentials">
+    <ListItem label="Withdrawal credentials">
       <Controls>
         <LoadableElement value={withdrawalCredentials}>
           <BytesBadge bytes={withdrawalCredentials} />
