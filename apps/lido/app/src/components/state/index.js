@@ -74,6 +74,8 @@ export const State = () => {
           nested
         />
         <WithdrawalCredentials />
+      </BoxUnpadded>
+      <BoxUnpadded heading="Locations">
         <ListItemAddress label="Treasury" value={treasury} />
         <ListItemAddress label="Oracle (legacy)" value={legacyOracle} />
         <ListItemAddress label="Recovery vault" value={recoveryVault} />
