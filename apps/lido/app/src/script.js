@@ -74,6 +74,26 @@ const protocolVariables = [
     fetch: createFetcher('getLidoLocator'),
   },
   {
+    stateKey: 'symbol',
+    updateEvents: [],
+    fetch: createFetcher('symbol'),
+  },
+  {
+    stateKey: 'decimals',
+    updateEvents: [],
+    fetch: createFetcher('decimals'),
+  },
+  {
+    stateKey: 'totalSupply',
+    updateEvents: [],
+    fetch: createFetcher('totalSupply'),
+  },
+  {
+    stateKey: 'totalShares',
+    updateEvents: [],
+    fetch: createFetcher('getTotalShares'),
+  },
+  {
     stateKey: 'stakeLimitFullInfo',
     updateEvents: [
       'StakingPaused',

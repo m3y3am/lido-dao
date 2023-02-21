@@ -2,16 +2,16 @@ import { useAppState } from '@aragon/api-react'
 import React from 'react'
 import {
   BoxUnpadded,
+  BytesBadge,
   ListItem,
   ListItemAddress,
   ListItemBasisPoints,
   ListItemBoolean,
   ListItemEther,
   ListItemUnformattedValue,
+  LoadableElement,
 } from '../shared'
-import { Fee } from './Fee'
 import { Status } from './Status'
-import { WithdrawalCredentials } from './WithdrawalCredentials'
 
 export const State = () => {
   const {
@@ -21,7 +21,9 @@ export const State = () => {
     totalPooledEther,
     totalELRewardsCollected,
     beaconStat,
+    fee,
     feeDistribution,
+    withdrawalCredentials,
     treasury,
     legacyOracle,
     recoveryVault,
@@ -56,7 +58,7 @@ export const State = () => {
         />
       </BoxUnpadded>
       <BoxUnpadded heading="Configuration">
-        <Fee />
+        <ListItemBasisPoints label="Protocol fee" value={fee} />
         <ListItem label="Protocol fee distribution" noBorder />
         <ListItemBasisPoints
           label="Treasury"
@@ -73,7 +75,11 @@ export const State = () => {
           value={feeDistribution?.operatorsFeeBasisPoints}
           nested
         />
-        <WithdrawalCredentials />
+        <ListItem label="Withdrawal credentials">
+          <LoadableElement value={withdrawalCredentials}>
+            <BytesBadge bytes={withdrawalCredentials} />
+          </LoadableElement>
+        </ListItem>
       </BoxUnpadded>
       <BoxUnpadded heading="Locations">
         <ListItemAddress label="Treasury" value={treasury} />

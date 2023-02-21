@@ -2,7 +2,11 @@ import React from 'react'
 import { formatEth } from '../../utils'
 import { constants } from 'ethers'
 
-export const Ether = ({ ether }) => {
+export const Ether = ({
+  ether,
+  symbol = constants.EtherSymbol,
+  symbolAfter = false,
+}) => {
   try {
     ether = formatEth(ether)
   } catch (error) {
@@ -12,8 +16,9 @@ export const Ether = ({ ether }) => {
 
   return (
     <span>
-      {constants.EtherSymbol}
+      {!symbolAfter && symbol}
       {ether}
+      {symbolAfter && ' ' + symbol}
     </span>
   )
 }
