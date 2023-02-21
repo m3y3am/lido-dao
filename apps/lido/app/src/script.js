@@ -89,11 +89,6 @@ const protocolVariables = [
     fetch: createFetcher('totalSupply'),
   },
   {
-    stateKey: 'totalShares',
-    updateEvents: [],
-    fetch: createFetcher('getTotalShares'),
-  },
-  {
     stateKey: 'stakeLimitFullInfo',
     updateEvents: [
       'StakingPaused',

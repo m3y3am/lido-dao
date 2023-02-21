@@ -9,7 +9,7 @@ import {
 
 export const StETH = () => {
   const { currentApp } = useAragonApi()
-  const { symbol, decimals, totalSupply, totalShares } = useAppState()
+  const { symbol, decimals, totalSupply } = useAppState()
 
   return (
     <BoxUnpadded heading="Token">
@@ -19,12 +19,6 @@ export const StETH = () => {
         label="Total supply"
         value={totalSupply}
         symbol={symbol}
-        symbolAfter
-      />
-      <ListItemEther
-        label="Total supply"
-        value={totalShares}
-        symbol="shares"
         symbolAfter
       />
       <ListItemAddress label="Address" value={currentApp?.appAddress} />
