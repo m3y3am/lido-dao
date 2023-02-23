@@ -31,12 +31,19 @@ const getNodeOperators = async () => {
 const protocolVariables = [
   {
     stateKey: 'stakingModuleSummary',
-    updateEvents: [],
+    updateEvents: [
+      'VettedSigningKeysCountChanged',
+      'DepositedSigningKeysCountChanged',
+      'ExitedSigningKeysCountChanged',
+      'TotalSigningKeysCountChanged',
+      'StuckValidatorsCountChanged',
+      'RefundedValidatorsCountChanged',
+    ],
     fetch: createFetcher('getStakingModuleSummary'),
   },
   {
     stateKey: 'nonce',
-    updateEvents: [],
+    updateEvents: ['KeysOpIndexSet', 'NonceChanged'],
     fetch: createFetcher('getNonce'),
   },
   {
@@ -56,12 +63,19 @@ const protocolVariables = [
   },
   {
     stateKey: 'nodeOperators',
-    updateEvents: [],
+    updateEvents: [
+      'NodeOperatorAdded',
+      'NodeOperatorActiveSet',
+      'NodeOperatorNameSet',
+      'NodeOperatorRewardAddressSet',
+      'NodeOperatorTotalKeysTrimmed',
+      '',
+    ],
     fetch: getNodeOperators,
   },
   {
     stateKey: 'stakingModuleType',
-    updateEvents: [],
+    updateEvents: ['StakingModuleTypeSet'],
     fetch: createFetcher('getType'),
   },
   {
@@ -76,7 +90,7 @@ const protocolVariables = [
   },
   {
     stateKey: 'contractVersion',
-    updateEvents: [],
+    updateEvents: ['ContractVersionSet'],
     fetch: createFetcher('getContractVersion'),
   },
 ]
