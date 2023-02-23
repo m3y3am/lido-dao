@@ -25,7 +25,7 @@ const getNodeOperators = async () => {
   const promises = nodeOperatorsIds.map((id) => getNodeOperator(id))
   const settledPromises = await Promise.allSettled(promises)
   const nodeOperators = settledPromises.map((settled) => settled.value)
-  return nodeOperators
+  return nodeOperators.map((no, i) => ({ ...no, id: nodeOperatorsIds[i] }))
 }
 
 const protocolVariables = [
