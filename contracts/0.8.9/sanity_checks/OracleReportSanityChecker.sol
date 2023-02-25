@@ -507,7 +507,7 @@ contract OracleReportSanityChecker is AccessControlEnumerable {
         (, , , uint256 requestTimestampToFinalizeUpTo, , ) = IWithdrawalQueue(_withdrawalQueue)
             .getWithdrawalRequestStatus(_requestIdToFinalizeUpTo);
         if (_reportTimestamp < requestTimestampToFinalizeUpTo + _limitsList.requestTimestampMargin)
-            revert IncorrectRequestFinalization(requestTimestampToFinalizeUpTo);
+            revert IncorrectRequestFinalization(_reportTimestamp, requestTimestampToFinalizeUpTo, _limitsList.requestTimestampMargin);
     }
 
     function _checkFinalizationShareRate(
@@ -577,7 +577,7 @@ contract OracleReportSanityChecker is AccessControlEnumerable {
     error IncorrectAppearedValidators(uint256 churnLimit);
     error IncorrectNumberOfExitRequestsPerReport(uint256 maxRequestsCount);
     error IncorrectExitedValidators(uint256 churnLimit);
-    error IncorrectRequestFinalization(uint256 requestCreationBlock);
+    error IncorrectRequestFinalization(uint256 reportTimestamp, uint256 requestCreationTimestamp, uint256 requestFinalizationMargin);
     error IncorrectFinalizationShareRate(uint256 finalizationShareDeviation);
     error MaxAccountingExtraDataItemsCountExceeded(uint256 maxItemsCount, uint256 receivedItemsCount);
     error ExitedValidatorsLimitExceeded(uint256 limitPerDay, uint256 exitedPerDay);
