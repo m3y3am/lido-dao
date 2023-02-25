@@ -515,9 +515,9 @@ contract OracleReportSanityChecker is AccessControlEnumerable {
         address _lido,
         uint256 _simulatedShareRate
     ) internal view {
-        uint256 actualShareRate = ILido(_lido).getSharesByPooledEth(1 ether);
+        uint256 actualShareRate = ILido(_lido).getSharesByPooledEth(1 ether) * 1e9;
 
-        if (actualShareRate == 0 && _simulatedShareRate == 0) { return; }
+        if (actualShareRate == 0 || _simulatedShareRate == 0) { return; }
 
         uint256 finalizationShareDiff = Math256.abs(
             SafeCast.toInt256(_simulatedShareRate) - SafeCast.toInt256(actualShareRate)
